@@ -1,16 +1,16 @@
 package com.centralRelacionamento.ubots.models;
 
 
+import com.centralRelacionamento.ubots.enums.Setor;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString
 @Entity(name = "ATENDENTE")
 public class Atendente {
 
@@ -22,11 +22,10 @@ public class Atendente {
     @Column(name = "NOME_ATENDENTE")
     private String nome;
 
-    @Column(name = "EMAIL_ATENDENTE")
-    private String Email;
+    @Column(name = "EMAIL_ATENDENTE", unique = true)
+    private String email;
 
     @Column(name = "SETOR_ATENDENTE")
-    private Enum<Setor> setorEnum;
-
+    private Setor setor;
 
 }

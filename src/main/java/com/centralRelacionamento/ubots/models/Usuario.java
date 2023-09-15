@@ -1,5 +1,6 @@
 package com.centralRelacionamento.ubots.models;
 
+import com.centralRelacionamento.ubots.enums.Setor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

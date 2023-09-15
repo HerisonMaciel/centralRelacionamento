@@ -1,4 +1,4 @@
-package com.centralRelacionamento.ubots.models;
+package com.centralRelacionamento.ubots.enums;
 
 public enum Setor {
     CARTOES, EMPRESTIMOS, OUTROS;

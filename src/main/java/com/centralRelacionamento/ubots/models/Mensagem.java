@@ -1,11 +1,13 @@
 package com.centralRelacionamento.ubots.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -33,6 +35,7 @@ public class Mensagem {
     private String conteudo;
 
     @Column(name = "DATA_ENVIO")
-    private Date dataEnvio;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
+    private LocalDateTime dataEnvio;
 
 }
