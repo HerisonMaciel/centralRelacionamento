@@ -4,6 +4,13 @@ import com.centralRelacionamento.ubots.dto.AtendenteDTO;
 import com.centralRelacionamento.ubots.mapper.AtendenteMapper;
 import com.centralRelacionamento.ubots.models.Atendente;
 import com.centralRelacionamento.ubots.service.AtendenteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.headers.Header;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +35,12 @@ public class AtendenteController {
         this.atendenteService = atendenteService;
     }
 
+    @Operation(summary = "Criando Atendente", description = "Cria um atendente", tags = {"Atendente"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Atendente criado com sucesso!",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida!"),
+    })
     @PostMapping(value = "/cadastrar")
     public ResponseEntity cadastrar(@RequestBody AtendenteDTO AtendenteDto) {
         Atendente atendenteCadastrado = atendenteService.cadastrar(AtendenteMapper.toEntity(AtendenteDto));

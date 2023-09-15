@@ -13,20 +13,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "USUARIO")
-public class Usuario {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID_USURIO")
+    @Column(name = "ID_CLIENTE")
     private Long id;
 
-    @Column(name = "NOME_USURIO")
+    @Column(name = "NOME_CLIENTE")
     private String nome;
 
-    @Column(name = "EMAIL_USURIO")
+    @Column(name = "EMAIL_CLIENTE")
     private String Email;
 
-    @Column(name = "SETOR_USURIO")
+    @Column(name = "SETOR_CLIENTE")
     private Enum<Setor> setorEnum;
 
 }
