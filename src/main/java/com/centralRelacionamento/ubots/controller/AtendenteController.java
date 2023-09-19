@@ -5,7 +5,6 @@ import com.centralRelacionamento.ubots.mapper.AtendenteMapper;
 import com.centralRelacionamento.ubots.models.Atendente;
 import com.centralRelacionamento.ubots.service.AtendenteService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

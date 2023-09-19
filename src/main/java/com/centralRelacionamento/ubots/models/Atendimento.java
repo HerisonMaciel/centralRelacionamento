@@ -1,19 +1,18 @@
 package com.centralRelacionamento.ubots.models;
 
+import com.centralRelacionamento.ubots.enums.Setor;
+import com.centralRelacionamento.ubots.enums.StatusAtendimento;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString
 @Entity(name = "ATENDIMENTO")
 public class Atendimento {
 
@@ -23,10 +22,16 @@ public class Atendimento {
     private Long id;
 
     @Column(name = "ID_ATENDENTE")
-    private Long atendente;
+    private Long idAtendente;
 
     @Column(name = "ID_USUARIO")
-    private Long usuario;
+    private Long idUsuario;
+
+    @Column(name = "SETOR_ATENDIMENTO")
+    private Setor setorAtendimento;
+
+    @Column(name = "STATUS_ATENDIMENTO")
+    private StatusAtendimento statusAtendimento;
 
     @Column(name = "DATA_CRIACAO")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
