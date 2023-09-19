@@ -1,5 +1,6 @@
 package com.centralRelacionamento.ubots.models;
 
+import com.centralRelacionamento.ubots.enums.Envio;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,9 @@ public class Mensagem {
 
     @Column(name = "CONTEUDO")
     private String conteudo;
+
+    @Column(name = "ENVIO")
+    private Envio envio;
 
     @Column(name = "DATA_ENVIO")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)

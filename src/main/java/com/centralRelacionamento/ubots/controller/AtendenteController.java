@@ -42,8 +42,8 @@ public class AtendenteController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida!"),
     })
     @PostMapping(value = "/cadastrar")
-    public ResponseEntity cadastrar(@RequestBody AtendenteDTO AtendenteDto) {
-        Atendente atendenteCadastrado = atendenteService.cadastrar(AtendenteMapper.toEntity(AtendenteDto));
+    public ResponseEntity cadastrar(@RequestBody AtendenteDTO atendenteDTO) {
+        Atendente atendenteCadastrado = atendenteService.cadastrar(AtendenteMapper.toEntity(atendenteDTO));
         log.info("Atendente cadastrado: " + atendenteCadastrado);
         return new ResponseEntity<>(toDto(atendenteCadastrado), HttpStatus.CREATED);
     }

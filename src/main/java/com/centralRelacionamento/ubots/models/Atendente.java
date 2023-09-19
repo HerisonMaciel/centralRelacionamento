@@ -28,4 +28,6 @@ public class Atendente {
     @Column(name = "SETOR_ATENDENTE")
     private Setor setor;
 
+    private int quantAtendimento;
+
 }

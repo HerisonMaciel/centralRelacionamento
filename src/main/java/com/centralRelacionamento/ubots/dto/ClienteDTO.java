@@ -11,20 +11,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-    public class AtendenteDTO implements Serializable {
+public class ClienteDTO implements Serializable {
 
-    @JsonProperty("id_atendente")
+    @JsonProperty("id_cliente")
     private Long id;
 
-    @JsonProperty("nome_atendente")
+    @JsonProperty("nome_cliente")
     private String nome;
 
-    @JsonProperty("email_atendente")
+    @JsonProperty("email_cliente")
     private String email;
 
-    @JsonProperty("setor_atendente")
+    @JsonProperty("setor_cliente")
     private Setor setor;
-
-    private int quantAtendimento;
-
 }
