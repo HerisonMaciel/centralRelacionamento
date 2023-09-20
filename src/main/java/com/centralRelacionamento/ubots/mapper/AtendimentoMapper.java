@@ -8,8 +8,8 @@ public class AtendimentoMapper {
     public static Atendimento toEntity(AtendimentoDTO atendimentoDTO){
         return Atendimento.builder()
                 .id(atendimentoDTO.getId())
-                .idAtendente(atendimentoDTO.getIdAtendente())
-                .idUsuario(atendimentoDTO.getIdUsuario())
+                .cliente(atendimentoDTO.getCliente())
+                .atendente(atendimentoDTO.getAtendente())
                 .setorAtendimento(atendimentoDTO.getSetorAtendimento())
                 .statusAtendimento(atendimentoDTO.getStatusAtendimento())
                 .build();
@@ -18,8 +18,8 @@ public class AtendimentoMapper {
     public static AtendimentoDTO toDto(Atendimento atendimento){
         return AtendimentoDTO.builder()
                 .id(atendimento.getId())
-                .idAtendente(atendimento.getIdAtendente())
-                .idUsuario(atendimento.getIdUsuario())
+                .atendente(atendimento.getAtendente())
+                .cliente(atendimento.getCliente())
                 .setorAtendimento(atendimento.getSetorAtendimento())
                 .statusAtendimento(atendimento.getStatusAtendimento())
                 .build();

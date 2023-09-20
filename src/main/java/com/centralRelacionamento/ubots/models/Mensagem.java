@@ -18,18 +18,21 @@ import java.time.LocalDateTime;
 public class Mensagem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_MENSAGEM")
     private Long id;
 
-    @Column(name = "ID_ATENDIMENTO")
-    private Long idAtendimento;
+    @OneToOne
+    @JoinColumn(name = "ATENDIMENTO")
+    private Atendimento atendimento;
 
-    @Column(name = "ID_ATENDENTE")
-    private Long idAtendente;
+    @OneToMany
+    @JoinColumn(name = "ATENDENTE")
+    private Atendente atendente;
 
-    @Column(name = "ID_USUARIO")
-    private Long idUsuario;
+    @OneToMany
+    @JoinColumn(name = "CLIENTE")
+    private Cliente cliente;
 
     @Column(name = "CONTEUDO")
     private String conteudo;

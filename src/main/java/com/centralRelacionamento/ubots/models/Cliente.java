@@ -2,6 +2,7 @@ package com.centralRelacionamento.ubots.models;
 
 import com.centralRelacionamento.ubots.enums.Setor;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 
@@ -10,18 +11,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "USUARIO")
+@Entity(name = "CLIENTE")
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_CLIENTE")
     private Long id;
 
     @Column(name = "NOME_CLIENTE")
     private String nome;
 
-    @Column(name = "EMAIL_CLIENTE")
+    @Email(message = "O campo deve conter um endereço de e-mail válido.")
+    @Column(name = "EMAIL_CLIENTE", unique = true)
     private String email;
 
     @Column(name = "SETOR_CLIENTE")

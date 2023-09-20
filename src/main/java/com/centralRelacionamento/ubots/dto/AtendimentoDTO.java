@@ -2,6 +2,8 @@ package com.centralRelacionamento.ubots.dto;
 
 import com.centralRelacionamento.ubots.enums.Setor;
 import com.centralRelacionamento.ubots.enums.StatusAtendimento;
+import com.centralRelacionamento.ubots.models.Atendente;
+import com.centralRelacionamento.ubots.models.Cliente;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -17,11 +19,11 @@ public class AtendimentoDTO implements Serializable {
     @JsonProperty("id_atendimento")
     private Long id;
 
-    @JsonProperty("id_atendente")
-    private Long idAtendente;
+    @JsonProperty("atendente")
+    private Atendente atendente;
 
-    @JsonProperty("id_usuario")
-    private Long idUsuario;
+    @JsonProperty("cliente")
+    private Cliente cliente;
 
     @JsonProperty("setor_atendimento")
     private Setor setorAtendimento;

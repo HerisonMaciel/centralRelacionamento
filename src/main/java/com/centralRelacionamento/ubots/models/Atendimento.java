@@ -17,15 +17,17 @@ import java.time.LocalDateTime;
 public class Atendimento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_ATENDIMENTO")
     private Long id;
 
-    @Column(name = "ID_ATENDENTE")
-    private Long idAtendente;
+    @OneToOne
+    @JoinColumn(name = "ATENDENTE")
+    private Atendente atendente;
 
-    @Column(name = "ID_USUARIO")
-    private Long idUsuario;
+    @OneToOne
+    @JoinColumn(name = "CLIENTE")
+    private Cliente cliente;
 
     @Column(name = "SETOR_ATENDIMENTO")
     private Setor setorAtendimento;
