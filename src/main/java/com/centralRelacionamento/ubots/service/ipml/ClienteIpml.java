@@ -26,7 +26,7 @@ public class ClienteIpml implements ClienteService {
 
     @Override
     public Cliente cadastrar(Cliente cliente) {
-        log.info("salvando atendente: " + cliente);
+        log.info("salvando cliente: " + cliente);
         return clienteRepository.save(cliente);
     }
 

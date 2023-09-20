@@ -21,11 +21,11 @@ public class Atendimento {
     @Column(name = "ID_ATENDIMENTO")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ATENDENTE")
     private Atendente atendente;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "CLIENTE")
     private Cliente cliente;
 

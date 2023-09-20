@@ -11,7 +11,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-    public class AtendenteDTO implements Serializable {
+@ToString
+public class AtendenteDTO implements Serializable {
 
     @JsonProperty("id_atendente")
     private Long id;

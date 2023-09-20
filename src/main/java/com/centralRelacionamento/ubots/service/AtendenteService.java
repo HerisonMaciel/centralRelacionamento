@@ -15,4 +15,6 @@ public interface AtendenteService {
     List<AtendenteDTO> obterTodosAtendentes();
 
     AtendenteDTO obterAtendente(Long id);
+
+    Boolean verificarDisponibilidadeDoAtendente(Long id);
 }

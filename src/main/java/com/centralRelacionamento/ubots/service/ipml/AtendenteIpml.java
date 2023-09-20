@@ -26,7 +26,7 @@ public class AtendenteIpml implements AtendenteService {
 
     @Override
     public Atendente cadastrar(Atendente atedente) {
-        log.info("salvando atendente: " + atedente);
+        log.info("salvando atendente: " + atedente.toString());
         return atendenteRepository.save(atedente);
     }
 
@@ -47,6 +47,16 @@ public class AtendenteIpml implements AtendenteService {
         log.info("buscando atendente do id: " + id);
         Atendente atendente = atendenteRepository.getReferenceById(id);
         return construirAtendente(atendente);
+    }
+
+    @Override
+    public Boolean verificarDisponibilidadeDoAtendente(Long id) {
+        AtendenteDTO atendenteDTO = obterAtendente(id);
+        if(atendenteDTO.getQuantAtendimento()<3){
+            alterarQuantAtendimento(id, atendenteDTO.getQuantAtendimento()+1);
+            return true;
+        }
+        return false;
     }
 
     private List<AtendenteDTO> construirLista(List<Atendente> atendenteList){
@@ -75,4 +85,10 @@ public class AtendenteIpml implements AtendenteService {
                 .build();
     }
 
+    private void alterarQuantAtendimento(Long id, int quantAtendimento){
+        Atendente atendente = atendenteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Registro não encontrado com o ID: " + id));
+        atendente.setQuantAtendimento(quantAtendimento);
+        atendenteRepository.save(atendente);
+    }
 }
