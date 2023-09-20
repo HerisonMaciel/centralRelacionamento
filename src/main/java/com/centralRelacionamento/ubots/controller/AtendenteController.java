@@ -38,6 +38,7 @@ public class AtendenteController {
             @ApiResponse(responseCode = "201", description = "Atendente criado com sucesso!",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))),
             @ApiResponse(responseCode = "400", description = "Requisição inválida!"),
+            @ApiResponse(responseCode = "404", description = "Not found"),
     })
     @PostMapping(value = "/cadastrar")
     public ResponseEntity cadastrar(@RequestBody AtendenteDTO atendenteDTO) {
@@ -48,15 +49,10 @@ public class AtendenteController {
 
     @Operation(summary = "Buscar todos Atendentes", description = "Buscar todos Atendentes", tags = {"Atendente"})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "404", description = "Not found",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))
-            ),
-            @ApiResponse(responseCode = "400", description = "Bad request",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))
-            ),
             @ApiResponse(responseCode = "200", description = "Ok",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))
-            )
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida!"),
+            @ApiResponse(responseCode = "404", description = "Not found"),
     })
     @GetMapping
     public ResponseEntity<List<AtendenteDTO>> obterAtendentes(){

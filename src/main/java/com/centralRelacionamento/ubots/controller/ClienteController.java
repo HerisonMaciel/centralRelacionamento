@@ -4,14 +4,19 @@ import com.centralRelacionamento.ubots.dto.ClienteDTO;
 import com.centralRelacionamento.ubots.mapper.ClienteMapper;
 import com.centralRelacionamento.ubots.models.Cliente;
 import com.centralRelacionamento.ubots.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.centralRelacionamento.ubots.mapper.ClienteMapper.toDto;
 
@@ -28,11 +33,31 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
+    @Operation(summary = "Criando cliente", description = "Cria um cliente", tags = {"Cliente"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso!",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ClienteDTO.class)))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida!"),
+            @ApiResponse(responseCode = "404", description = "Not found"),
+    })
     @PostMapping(value = "/cadastrar")
     public ResponseEntity cadastrar(@RequestBody ClienteDTO clienteDTO) {
         Cliente clienteCadastrado = clienteService.cadastrar(ClienteMapper.toEntity(clienteDTO));
         log.info("Cliente cadastrado: " + clienteCadastrado);
         return new ResponseEntity<>(toDto(clienteCadastrado), HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Buscar todos Clientes", description = "Buscar todos Clientes", tags = {"Cliente"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ClienteDTO.class)))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida!"),
+            @ApiResponse(responseCode = "404", description = "Not found"),
+    })
+    @GetMapping
+    public ResponseEntity<List<ClienteDTO>> obterAtendentes(){
+        List<ClienteDTO> atendenteDTOList = clienteService.obterClientes();
+        return new ResponseEntity<>(atendenteDTOList, HttpStatus.OK);
     }
 
 
