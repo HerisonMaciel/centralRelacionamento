@@ -11,5 +11,7 @@ public interface ClienteService {
 
     Cliente cadastrar(Cliente toEntity);
 
-    List<ClienteDTO> obterClientes();
+    List<ClienteDTO> obterTodosClientes();
+
+    ClienteDTO obterCliente(Long id);
 }

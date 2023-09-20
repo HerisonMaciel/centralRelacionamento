@@ -11,6 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class ClienteDTO implements Serializable {
 
     @JsonProperty("id_cliente")

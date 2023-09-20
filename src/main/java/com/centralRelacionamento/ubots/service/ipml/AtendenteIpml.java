@@ -6,6 +6,7 @@ import com.centralRelacionamento.ubots.repository.AtendenteRepository;
 import com.centralRelacionamento.ubots.service.AtendenteService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class AtendenteIpml implements AtendenteService {
     }
 
     @Override
-    public List<AtendenteDTO> obterAtendentes() {
+    public List<AtendenteDTO> obterTodosAtendentes() {
         log.info("Buscando todos os atendentes: ");
         Optional<List<Atendente>> atendenteList = Optional.of(atendenteRepository.findAll());
 
@@ -39,6 +40,13 @@ public class AtendenteIpml implements AtendenteService {
             return construirLista(atendentes);
         }
         return null;
+    }
+
+    @Override
+    public AtendenteDTO obterAtendente(Long id) {
+        log.info("buscando atendente do id: " + id);
+        Atendente atendente = atendenteRepository.getReferenceById(id);
+        return construirAtendente(atendente);
     }
 
     private List<AtendenteDTO> construirLista(List<Atendente> atendenteList){
@@ -55,6 +63,16 @@ public class AtendenteIpml implements AtendenteService {
         }
 
         return atendenteDTOList;
+    }
+
+    private AtendenteDTO construirAtendente(Atendente atendente){
+        return AtendenteDTO.builder()
+                .id(atendente.getId())
+                .nome(atendente.getNome())
+                .email(atendente.getEmail())
+                .setor(atendente.getSetor())
+                .quantAtendimento(atendente.getQuantAtendimento())
+                .build();
     }
 
 }

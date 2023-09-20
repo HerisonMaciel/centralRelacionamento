@@ -1,10 +1,12 @@
 package com.centralRelacionamento.ubots.controller;
 
+import com.centralRelacionamento.ubots.dto.AtendenteDTO;
 import com.centralRelacionamento.ubots.dto.ClienteDTO;
 import com.centralRelacionamento.ubots.mapper.ClienteMapper;
 import com.centralRelacionamento.ubots.models.Cliente;
 import com.centralRelacionamento.ubots.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -55,10 +57,32 @@ public class ClienteController {
             @ApiResponse(responseCode = "404", description = "Not found"),
     })
     @GetMapping
-    public ResponseEntity<List<ClienteDTO>> obterAtendentes(){
-        List<ClienteDTO> atendenteDTOList = clienteService.obterClientes();
-        return new ResponseEntity<>(atendenteDTOList, HttpStatus.OK);
+    public ResponseEntity<List<ClienteDTO>> obterTodosClientes(){
+        try{
+            List<ClienteDTO> atendenteDTOList = clienteService.obterTodosClientes();
+            return new ResponseEntity<>(atendenteDTOList, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
+    @Operation(summary = "Buscar por cliente", description = "Buscar individual passando id do cleinte", tags = {"Cliente"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ClienteDTO.class)))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida!"),
+            @ApiResponse(responseCode = "404", description = "Not found"),
+    })
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ClienteDTO> obterCliente(@Parameter(description = "id do cliente") @PathVariable Long id) {
+        try {
+            ClienteDTO clienteDTO = clienteService.obterCliente(id);
+            log.info("Cliente: " + clienteDTO.toString());
+            return new ResponseEntity<>(clienteDTO, HttpStatus.OK);
+        }catch (Exception e){
+            log.info("Cliente não encontrado para o id: " + id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

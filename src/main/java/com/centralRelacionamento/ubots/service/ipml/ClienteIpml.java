@@ -31,15 +31,26 @@ public class ClienteIpml implements ClienteService {
     }
 
     @Override
-    public List<ClienteDTO> obterClientes() {
+    public List<ClienteDTO> obterTodosClientes() {
         log.info("Buscando todos os clientes: ");
-        Optional<List<Cliente>> clienteListOptional = Optional.of(clienteRepository.findAll());
+        List<Cliente> clienteList = clienteRepository.findAll();
+        return construirLista(clienteList);
+    }
 
-        if(clienteListOptional.isPresent()){
-            List<Cliente> clientesList = clienteListOptional.get();
-            return construirLista(clientesList);
-        }
-        return null;
+    @Override
+    public ClienteDTO obterCliente(Long id) {
+        log.info("Buscando cliente pelo id: " + id);
+        Cliente cliente = clienteRepository.getReferenceById(id);
+        return construirCliente(cliente);
+    }
+
+    private ClienteDTO construirCliente(Cliente cliente) {
+        return ClienteDTO.builder()
+                .id(cliente.getId())
+                .nome(cliente.getNome())
+                .email(cliente.getEmail())
+                .setor(cliente.getSetor())
+                .build();
     }
 
     private List<ClienteDTO> construirLista(List<Cliente> clienteList){

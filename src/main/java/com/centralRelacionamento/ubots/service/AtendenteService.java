@@ -12,5 +12,7 @@ public interface AtendenteService {
 
     Atendente cadastrar(Atendente toEntity);
 
-    List<AtendenteDTO> obterAtendentes();
+    List<AtendenteDTO> obterTodosAtendentes();
+
+    AtendenteDTO obterAtendente(Long id);
 }
