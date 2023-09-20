@@ -26,11 +26,11 @@ public class Mensagem {
     @JoinColumn(name = "ATENDIMENTO")
     private Atendimento atendimento;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "ATENDENTE")
     private Atendente atendente;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "CLIENTE")
     private Cliente cliente;
 

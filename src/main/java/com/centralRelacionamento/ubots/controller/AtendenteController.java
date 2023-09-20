@@ -14,10 +14,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.centralRelacionamento.ubots.mapper.AtendenteMapper.toDto;
 
@@ -45,6 +44,24 @@ public class AtendenteController {
         Atendente atendenteCadastrado = atendenteService.cadastrar(AtendenteMapper.toEntity(atendenteDTO));
         log.info("Atendente cadastrado: " + atendenteCadastrado);
         return new ResponseEntity<>(toDto(atendenteCadastrado), HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Buscar todos Atendentes", description = "Buscar todos Atendentes", tags = {"Atendente"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "404", description = "Not found",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))
+            ),
+            @ApiResponse(responseCode = "400", description = "Bad request",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))
+            ),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AtendenteDTO.class)))
+            )
+    })
+    @GetMapping
+    public ResponseEntity<List<AtendenteDTO>> obterAtendentes(){
+        List<AtendenteDTO> atendenteDTOList = atendenteService.obterAtendentes();
+        return new ResponseEntity<>(atendenteDTOList, HttpStatus.OK);
     }
 
 
