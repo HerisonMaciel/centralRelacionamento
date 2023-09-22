@@ -3,10 +3,7 @@ package com.centralRelacionamento.ubots.models;
 import com.centralRelacionamento.ubots.enums.Envio;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +11,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Builder
 @Entity(name = "MENSAGEM")
 public class Mensagem {
 
@@ -25,14 +24,6 @@ public class Mensagem {
     @OneToOne
     @JoinColumn(name = "ATENDIMENTO")
     private Atendimento atendimento;
-
-    @OneToOne
-    @JoinColumn(name = "ATENDENTE")
-    private Atendente atendente;
-
-    @OneToOne
-    @JoinColumn(name = "CLIENTE")
-    private Cliente cliente;
 
     @Column(name = "CONTEUDO")
     private String conteudo;
