@@ -27,13 +27,13 @@ public class AtendenteIpml implements AtendenteService {
     @Override
     public Atendente cadastrar(Atendente atedente) {
         log.info("salvando atendente: " + atedente.toString());
-        return atendenteRepository.save(atedente);
+        return this.atendenteRepository.save(atedente);
     }
 
     @Override
     public List<AtendenteDTO> obterTodosAtendentes() {
         log.info("Buscando todos os atendentes: ");
-        Optional<List<Atendente>> atendenteList = Optional.of(atendenteRepository.findAll());
+        Optional<List<Atendente>> atendenteList = Optional.of(this.atendenteRepository.findAll());
 
         if(atendenteList.isPresent()){
             List<Atendente> atendentes = atendenteList.get();
@@ -45,7 +45,7 @@ public class AtendenteIpml implements AtendenteService {
     @Override
     public AtendenteDTO obterAtendente(Long id) {
         log.info("buscando atendente do id: " + id);
-        Atendente atendente = atendenteRepository.getReferenceById(id);
+        Atendente atendente = this.atendenteRepository.getReferenceById(id);
         return construirAtendente(atendente);
     }
 
@@ -58,6 +58,15 @@ public class AtendenteIpml implements AtendenteService {
         }
         return false;
     }
+
+    @Override
+    public void alterarQuant(Long id) {
+        AtendenteDTO atendenteDTO = obterAtendente(id);
+        if(atendenteDTO.getQuantAtendimento()>0){
+            alterarQuantAtendimento(id, atendenteDTO.getQuantAtendimento()-1);
+        }
+    }
+
 
     private List<AtendenteDTO> construirLista(List<Atendente> atendenteList){
         List<AtendenteDTO> atendenteDTOList = new ArrayList<>();
@@ -86,9 +95,9 @@ public class AtendenteIpml implements AtendenteService {
     }
 
     private void alterarQuantAtendimento(Long id, int quantAtendimento){
-        Atendente atendente = atendenteRepository.findById(id)
+        Atendente atendente = this.atendenteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Registro não encontrado com o ID: " + id));
         atendente.setQuantAtendimento(quantAtendimento);
-        atendenteRepository.save(atendente);
+        this.atendenteRepository.save(atendente);
     }
 }

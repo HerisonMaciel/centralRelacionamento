@@ -59,8 +59,8 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> obterTodosClientes(){
         try{
-            List<ClienteDTO> atendenteDTOList = clienteService.obterTodosClientes();
-            return new ResponseEntity<>(atendenteDTOList, HttpStatus.OK);
+            List<ClienteDTO> clienteDTOList = clienteService.obterTodosClientes();
+            return new ResponseEntity<>(clienteDTOList, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

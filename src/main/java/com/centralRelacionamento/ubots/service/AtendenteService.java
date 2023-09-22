@@ -17,4 +17,7 @@ public interface AtendenteService {
     AtendenteDTO obterAtendente(Long id);
 
     Boolean verificarDisponibilidadeDoAtendente(Long id);
+
+
+    void alterarQuant(Long id);
 }

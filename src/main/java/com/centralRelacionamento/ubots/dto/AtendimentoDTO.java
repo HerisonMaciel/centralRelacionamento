@@ -8,12 +8,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class AtendimentoDTO implements Serializable {
 
     @JsonProperty("id_atendimento")
@@ -30,5 +33,11 @@ public class AtendimentoDTO implements Serializable {
 
     @JsonProperty("status_atendimento")
     private StatusAtendimento statusAtendimento;
+
+    @JsonProperty("data_criacao")
+    private LocalDateTime dataCriacao;
+
+    @JsonProperty("data_encerramento")
+    private LocalDateTime dataEncerramento;
 
 }

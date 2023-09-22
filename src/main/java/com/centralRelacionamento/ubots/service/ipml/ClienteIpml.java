@@ -27,20 +27,20 @@ public class ClienteIpml implements ClienteService {
     @Override
     public Cliente cadastrar(Cliente cliente) {
         log.info("salvando cliente: " + cliente);
-        return clienteRepository.save(cliente);
+        return this.clienteRepository.save(cliente);
     }
 
     @Override
     public List<ClienteDTO> obterTodosClientes() {
         log.info("Buscando todos os clientes: ");
-        List<Cliente> clienteList = clienteRepository.findAll();
+        List<Cliente> clienteList = this.clienteRepository.findAll();
         return construirLista(clienteList);
     }
 
     @Override
     public ClienteDTO obterCliente(Long id) {
         log.info("Buscando cliente pelo id: " + id);
-        Cliente cliente = clienteRepository.getReferenceById(id);
+        Cliente cliente = this.clienteRepository.getReferenceById(id);
         return construirCliente(cliente);
     }
 

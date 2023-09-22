@@ -45,7 +45,7 @@ public class AtendenteController {
     })
     @PostMapping(value = "/cadastrar")
     public ResponseEntity cadastrar(@RequestBody AtendenteDTO atendenteDTO) {
-            Atendente atendenteCadastrado = atendenteService.cadastrar(AtendenteMapper.toEntity(atendenteDTO));
+            Atendente atendenteCadastrado = this.atendenteService.cadastrar(AtendenteMapper.toEntity(atendenteDTO));
             log.info("Atendente cadastrado: " + atendenteCadastrado);
             return new ResponseEntity<>(toDto(atendenteCadastrado), HttpStatus.CREATED);
     }
@@ -60,7 +60,7 @@ public class AtendenteController {
     @GetMapping
     public ResponseEntity<List<AtendenteDTO>> obterTodosAtendentes(){
         try {
-            List<AtendenteDTO> atendenteDTOList = atendenteService.obterTodosAtendentes();
+            List<AtendenteDTO> atendenteDTOList = this.atendenteService.obterTodosAtendentes();
             return new ResponseEntity<>(atendenteDTOList, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -78,7 +78,7 @@ public class AtendenteController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<AtendenteDTO> obterAtendente(@Parameter(description = "id do atendente") @PathVariable Long id) {
         try {
-            AtendenteDTO atendenteDTO = atendenteService.obterAtendente(id);
+            AtendenteDTO atendenteDTO = this.atendenteService.obterAtendente(id);
             log.info("Atendente: " + atendenteDTO.toString());
             return new ResponseEntity<>(atendenteDTO, HttpStatus.OK);
         }catch (Exception e){
