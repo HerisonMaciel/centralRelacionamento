@@ -12,6 +12,8 @@ public class AtendimentoMapper {
                 .atendente(atendimentoDTO.getAtendente())
                 .setorAtendimento(atendimentoDTO.getSetorAtendimento())
                 .statusAtendimento(atendimentoDTO.getStatusAtendimento())
+                .dataCriacao(atendimentoDTO.getDataCriacao())
+                .dataEncerramento(atendimentoDTO.getDataEncerramento())
                 .build();
     }
 

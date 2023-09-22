@@ -21,7 +21,7 @@ public class Mensagem {
     @Column(name = "ID_MENSAGEM")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ATENDIMENTO")
     private Atendimento atendimento;
 
